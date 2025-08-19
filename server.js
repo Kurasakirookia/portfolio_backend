@@ -4,7 +4,6 @@ const dotenv = require("dotenv").config();
 const path = require("path");
 const connectDb = require("./config/connectDb");
 
-
 connectDb();
 
 const app = express();
@@ -12,20 +11,21 @@ const app = express();
 // Serve the uploads folder publicly
 app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 
-// Allowed origins
+// ✅ Allowed origins (removed trailing slash)
 const allowedOrigins = [
-  "https://tejaskumardportfolio.netlify.app/",
-  "http://localhost:3000",              
+  "https://tejaskumardportfolio.netlify.app",  // fixed
+  "http://localhost:3000",
 ];
 
-// CORS config
+// ✅ CORS config
 app.use(
   cors({
     origin: function (origin, callback) {
-      // allow requests with no origin (like mobile apps, curl, postman)
+      // allow requests with no origin (like Postman, curl)
       if (!origin || allowedOrigins.includes(origin)) {
         callback(null, true);
       } else {
+        console.log("Blocked by CORS:", origin); // helpful log
         callback(new Error("Not allowed by CORS"));
       }
     },
