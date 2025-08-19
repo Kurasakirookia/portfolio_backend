@@ -12,12 +12,12 @@ const toolSchema = new mongoose.Schema({
          }, 
         
   level: { type: String,  } ,
-     // e.g., strong, basic, intermediate
+
   logoSrc:{ type:String, }
 });
 
 const skillSchema = new mongoose.Schema({
-  skillName: { type: String, required: true }, // e.g., Web Development, Documentation
+  skillName: { type: String, required: true }, 
   tools: [toolSchema]
 });
 
