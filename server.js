@@ -12,10 +12,26 @@ const app = express();
 // Serve the uploads folder publicly
 app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 
-app.use(cors({
-  origin: [process.env.CLIENT_URL, "http://localhost:3000"],
-  credentials: true,
-}));
+// Allowed origins
+const allowedOrigins = [
+  "https://kurasakiporfolio.netlify.app", // your live frontend
+  "http://localhost:3000",                // local dev
+];
+
+// CORS config
+app.use(
+  cors({
+    origin: function (origin, callback) {
+      // allow requests with no origin (like mobile apps, curl, postman)
+      if (!origin || allowedOrigins.includes(origin)) {
+        callback(null, true);
+      } else {
+        callback(new Error("Not allowed by CORS"));
+      }
+    },
+    credentials: true,
+  })
+);
 
 app.use(express.json());
 
@@ -24,7 +40,6 @@ app.use("/api/auth", require("./routes/authRoute"));
 app.use("/api/home", require("./routes/homeRoute"));
 app.use("/api/admin", require("./routes/adminRoute"));
 
+// Server
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
-
-
