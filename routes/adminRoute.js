@@ -1,10 +1,10 @@
-// routes/adminRoute.js
+
 const express = require("express");
 const upload = require("../middleware/uploadMiddelware");
 const router = express.Router();
 const { getSingleSkill,addSkill, updateSkill, deleteSkill,addExperience, updateExperience, deleteExperience, addProject, updateProject, deleteProject,addGraphic,updateGraphic,deleteGraphic, getSingleExperience, getSingleGraphic, getSingleProject } = require("../controllers/adminRouteController");
 const auth = require("../middleware/authMiddelware");
-// CRUD routes for skills
+
 router.use(auth);
 router.get("/skills/:id", getSingleSkill);
 router.post("/skills",upload.any(), addSkill);
