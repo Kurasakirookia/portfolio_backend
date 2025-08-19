@@ -1,4 +1,4 @@
-// controllers/adminRouteController.js
+
 const Skill = require("../models/skills");
 const Experience=require("../models/experiences")
 const Project = require("../models/projects.js");
