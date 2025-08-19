@@ -4,7 +4,7 @@ const dotenv = require("dotenv").config();
 const path = require("path");
 const connectDb = require("./config/connectDb");
 
-// Connect DB
+
 connectDb();
 
 const app = express();
@@ -14,8 +14,8 @@ app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 
 // Allowed origins
 const allowedOrigins = [
-  "https://kurasakiporfolio.netlify.app", // your live frontend
-  "http://localhost:3000",                // local dev
+  "https://tejaskumardportfolio.netlify.app/",
+  "http://localhost:3000",              
 ];
 
 // CORS config
